@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:file="http://www.mulesoft.org/schema/mule/file" xmlns:metadata="http://www.mulesoft.org/schema/mule/metadata" xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd
+http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd">
+    <json:xml-to-json-transformer name="XML_to_JSON" doc:name="XML to JSON"/>
+    <file:connector name="File" autoDelete="true" streaming="true" validateConnections="true" doc:name="File"/>
+    <json:xml-to-json-transformer name="XML_to_JSON1" doc:name="XML to JSON"/>
+    <flow name="assignment8Flow">
+        <file:inbound-endpoint path="C:\Users\Aakash A Talreja\Documents\Deepak\XML &amp; JSON" connector-ref="File" responseTimeout="10000" transformer-refs="XML_to_JSON1" doc:name="File">
+            <file:filename-regex-filter pattern=".*xml" caseSensitive="false"/>
+        </file:inbound-endpoint>
+        <logger level="INFO" doc:name="Logger"/>
+        <file:outbound-endpoint path="C:\Users\Aakash A Talreja\Documents\Deepak\Deepak Documents" outputPattern="Deek.json" connector-ref="File" responseTimeout="10000" doc:name="File"/>
+    </flow>
+</mule>
